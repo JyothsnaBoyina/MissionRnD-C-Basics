@@ -14,8 +14,24 @@ ERROR CASES:
 
 NOTES: 		use stdarg.h header.
 */
-
+#include <stdarg.h>
 int variableArguments(int arg_count, ...)
 {
-	return 0;
+	va_list arguments;
+	int count = 0;
+
+	/* Initializing arguments to store all values after num */
+	va_start(arguments,arg_count);
+
+	/* Sum all the inputs; we still rely on the function caller to tell us how
+	* many there are */
+	for (int x = 0; x < arg_count; x++)
+	{
+		if (va_arg(arguments, int) > 90)
+			count++;
+	}
+	va_end(arguments);                  // Cleans up the list
+
+	return count;
+	
 }
